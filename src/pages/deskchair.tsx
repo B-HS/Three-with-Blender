@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
 
 const DeskchairModel = () => {
-    const { scene } = useGLTF('/models/deskchair.glb')
+    const { scene } = useGLTF(`${import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '') || '/'}models/deskchair.glb`)
     return <primitive object={scene} />
 }
 
