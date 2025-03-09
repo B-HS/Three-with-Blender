@@ -44,6 +44,9 @@ jobs:
               with:
                   path: 'dist'
 
+            - name: Disable Jekyll
+              run: touch dist/.nojekyll
+
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
