@@ -15,7 +15,9 @@ const routerArray = [
     },
 ]
 
-const router = createBrowserRouter(routerArray)
+const router = createBrowserRouter(routerArray, {
+    basename: import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '') || '/',
+})
 
 export const BrowserRouter = () => {
     return <RouterProvider router={router} />

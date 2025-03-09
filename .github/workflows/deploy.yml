@@ -1,49 +1,49 @@
 name: GITHUB PAGE DEPLOYING
 
 on:
-  push:
-    branches: ["deploy"]
-    
-  workflow_dispatch:
+    push:
+        branches: ['deploy']
+
+    workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    group: 'pages'
+    cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v1
+              with:
+                  bun-version: latest
 
-      - name: Install dependencies
-        run: bun install --no-lockfile
+            - name: Install dependencies
+              run: bun install --no-lockfile
 
-      - name: Build Vite app
-        run: bun run build
+            - name: Build Vite app
+              run: bun run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+            - name: Setup Pages
+              uses: actions/configure-pages@v5
 
-      - name: Upload artifact (dist folder)
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'dist'
+            - name: Upload artifact (dist folder)
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: 'dist'
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
